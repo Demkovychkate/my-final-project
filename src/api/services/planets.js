@@ -8,8 +8,6 @@ const planetsApi = {
       }
       return data;
     })
-
-   
     .catch((err) => {
       console.error(err);
     }),
