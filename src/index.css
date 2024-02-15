@@ -1,17 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Sacramento", cursive;
+  font-weight: 400;
+  font-style: normal;;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://media.istockphoto.com/id/498478219/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%B7%D0%B2%D0%B5%D0%B7%D0%B4%D1%8B-%D0%BD%D0%BE%D1%87%D1%8C%D1%8E-%D0%BD%D0%B5%D0%B1%D0%BE.jpg?s=612x612&w=0&k=20&c=uGe4fN1u8CoXI0WDc4r23kWIciVnk3c3KP6F4snDgSU=');
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: "Sacramento", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 * {
   box-sizing: border-box;  
-}
+  }
+
