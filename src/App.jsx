@@ -3,7 +3,7 @@ import Templates from './components/Templates/Templates';
 
 function App() {
   return (
-  <Templates />
+    <Templates />
   );
 }
 
