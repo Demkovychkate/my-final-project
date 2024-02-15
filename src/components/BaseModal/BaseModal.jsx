@@ -1,20 +1,28 @@
-import React from 'react';
-import { Typography } from '@mui/material';
-import { DescriptionTypography } from '../Card/styled';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
 
 const BaseModal = ({ title, image, description }) => (
-  <>
-  <img
-      src={image}
-      title={title}
-   />
-      <Typography gutterBottom variant="h5" component="div">
-       {title}
-      </Typography>
-      <DescriptionTypography variant="body2" color="text.secondary">
-       {description}
-      </DescriptionTypography>
-  </>
+    <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="300"
+          image={image}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {description}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
 );
 
 export default BaseModal;
