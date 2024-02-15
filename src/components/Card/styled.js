@@ -2,7 +2,7 @@ import { Card, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 export const CardWrapper = styled(Card)`
-  width: 350px;
+  width: 160px;
   `;
 
 export const DescriptionTypography = styled(Typography)`
