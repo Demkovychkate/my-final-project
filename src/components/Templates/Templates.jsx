@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
 import Planets from '../../pages/Planets/Planets';
-import { SparklesPreview } from '../SparklesPreview/SparklesPreview';
+import SparklesPreview  from '../SparklesPreview/SparklesPreview';
 
 const Templates = () => (
     <Grid container >
