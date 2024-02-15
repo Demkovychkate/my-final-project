@@ -1,11 +1,11 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import CardItem from '../components/Card/Card';
 
 const Planets = () => {
   const [planets, setPlanets] = useState([]);
 
   return (
-    <div></div>
+    <CardItem />
   );
 };
 
