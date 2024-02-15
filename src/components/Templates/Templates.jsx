@@ -3,10 +3,9 @@ import React from 'react';
 import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
 import Planets from '../../pages/Planets/Planets';
-import SparklesPreview from './styled';
+import SparklesPreview  from '../SparklesPreview/SparklesPreview';
 
 const Templates = () => (
-  < SparklesPreview >
     <Grid container >
     <Grid item xs={12}>
       <Header />
@@ -15,10 +14,11 @@ const Templates = () => (
       <SideBar />
     </Grid>
     <Grid item xs={10}>
-      <Planets />
+      <SparklesPreview>
+         <Planets />
+      </SparklesPreview>      
     </Grid>
   </Grid>
-  </SparklesPreview>
 );
 
 export default Templates;
