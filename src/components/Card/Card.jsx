@@ -18,17 +18,14 @@ const CardItem = ({
     <>
     <CardWrapper>
     <CardMedia
-      sx={{ height: 450 }}
+      sx={{ height: 420 }}
       image={image}
       planet={planet}
       title={title}
     />
     <CardContent>
-      <Typography >
-       {planet}
-      </Typography>
       <DescriptionTypography>
-       {title}
+       {planet}
       </DescriptionTypography>
     </CardContent>
     <CardActions>
