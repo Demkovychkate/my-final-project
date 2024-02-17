@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
   position: relative;
-  width: 100%;
-  height: 30%;
+  height: 100px; 
   display: flex;
   flex-direction: column;
   align-items: center;
