@@ -38,6 +38,7 @@ const CardItem = ({
         planet={planet}
         image={image}
         description={description}
+        handleClose={handleCloseModal}
         />
     </ModalWindow>
     </>
