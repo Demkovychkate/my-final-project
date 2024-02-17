@@ -5,7 +5,9 @@ import { SparklesCore } from '../ui/sparkles.tsx';
 import { HeaderContainer, Title } from './styled';
 
 const Header = () => (
+  <>
 <HeaderContainer>
+<Title>Our Universe</Title>
     <SparklesCore
       background='transparent'
       minSize={0.4}
@@ -14,8 +16,8 @@ const Header = () => (
       style={{ width: '50%', height: '50%' }}
       particleColor='#FFFFFF'
     />
-      <Title>Our Universe</Title>
     </HeaderContainer>
+  </>
 );
 
 export default Header;
