@@ -5,7 +5,7 @@
 // import { CardActionArea } from '@mui/material';
 // import { Typography } from './styled';
 
-// const BaseModal = ({ image, description }) => (
+// const BaseModal = ({ image, description, handleClose }) => (
 //   <div style={{
 //     display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh',
 //   }}>
@@ -15,11 +15,12 @@
 //           component='img'
 //           height="350"
 //           width='100%'
-//           objectFit='cover'
+//           objectFit='contain'
 //           image={image}
-//         />
+//           onClick={handleClose}
+//           />
 //         <CardContent>
-//           <Typography variant="body3" color="text.primary">
+//           <Typography >
 //             {description}
 //           </Typography>
 //         </CardContent>
@@ -41,18 +42,17 @@ const BaseModal = ({ image, description, handleClose }) => (
   <div style={{
     display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh',
   }}>
-    <Card sx={{ maxWidth: 500 }}>
-      <CardActionArea>
+    <Card sx={{ maxWidth: 500, background: 'none' }}>
+      <CardActionArea onClick={handleClose}>
         <CardMedia
           component='img'
           height="350"
           width='100%'
-          objectFit='cover'
           image={image}
-          onClick={handleClose} // Додайте обробник події onClick
+          style={{ objectFit: 'contain' }}
         />
         <CardContent>
-          <Typography >
+          <Typography>
             {description}
           </Typography>
         </CardContent>
