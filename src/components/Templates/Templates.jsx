@@ -14,7 +14,7 @@ const Templates = () => (
     </Grid>
     <Grid item xs={10.5}>
       <Planets />
-    </Grid>
+      </Grid>
   </Grid>
 );
 
