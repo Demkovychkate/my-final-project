@@ -1,4 +1,5 @@
 import axios from '../service';
+import Toast from '../../components/Toast/Toast';
 
 const planetsApi = {
   fetch: () => axios.get('/planets')
@@ -8,8 +9,8 @@ const planetsApi = {
       }
       return data;
     })
-    .catch((err) => {
-      console.error(err);
+    .catch((error) => {
+      Toast({ message: `Error ${error.response.status}: ${error.message}` });
     }),
 };
 

@@ -21,4 +21,8 @@ export const Title = styled.h1`
   top:20%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media (max-width: 768px) {
+    font-size: 40px; 
+  }
 `;

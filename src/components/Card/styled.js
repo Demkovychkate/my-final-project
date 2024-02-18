@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const CardWrapper = styled.div`  
   width: 160px;
   margin-top: 1.5%;
+  margin-right: 5px;
   `;
 
 export const DescriptionTypography = styled.div`
