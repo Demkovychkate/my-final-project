@@ -1,10 +1,12 @@
 import { Grid } from '@mui/material';
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
-import Planets from '../../pages/Planets/Planets';
+import { TemplateWrapper } from './styled';
 
 const Templates = () => (
+  <TemplateWrapper>
     <Grid container >
     <Grid item xs={12}>
       <Header />
@@ -13,9 +15,10 @@ const Templates = () => (
       <SideBar />
     </Grid>
     <Grid item xs={10.5}>
-      <Planets />
+      <Outlet />
       </Grid>
   </Grid>
+  </TemplateWrapper>
 );
 
 export default Templates;
