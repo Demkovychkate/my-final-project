@@ -3,8 +3,10 @@ import React from 'react';
 import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
 import Planets from '../../pages/Planets/Planets';
+import { TemplateWrapper } from './styled';
 
 const Templates = () => (
+  <TemplateWrapper>
     <Grid container >
     <Grid item xs={12}>
       <Header />
@@ -16,6 +18,7 @@ const Templates = () => (
       <Planets />
       </Grid>
   </Grid>
+  </TemplateWrapper>
 );
 
 export default Templates;
