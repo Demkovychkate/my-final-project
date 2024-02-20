@@ -8,7 +8,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: 0.5rem; 
 `;
 
 export const Title = styled.h1`
@@ -21,6 +21,7 @@ export const Title = styled.h1`
   top:20%;
   left: 50%;
   transform: translate(-50%, -50%);
+  cursor: pointer;
 
   @media (max-width: 768px) {
     font-size: 40px; 
