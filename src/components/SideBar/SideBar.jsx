@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
-import { SideBarWrapper, BurgerMenuIcon } from './styled';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { SideBarWrapper, Input, StyledLink } from './styled';
 
-const SideBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleSideBar = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <SideBarWrapper isOpen={isOpen}>
-      <BurgerMenuIcon onClick={toggleSideBar}>&#9776;</BurgerMenuIcon>
-      SideBar
-    </SideBarWrapper>
-  );
-};
-
+const SideBar = () => (
+    <SideBarWrapper>
+   <Input placeholder="Search" />
+   <StyledLink to='/ouruniverse/favorite'>Favorite</StyledLink>
+   <StyledLink to='/ouruniverse/new'>New Quiz</StyledLink>
+   </SideBarWrapper>
+);
 export default SideBar;
