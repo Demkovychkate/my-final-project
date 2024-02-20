@@ -11,12 +11,12 @@ const CardItem = ({
   id, planet, image, description, title,
 }) => {
   const [openModal, setOpenModal] = useState(false);
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
-  const handleGoToQuiz = (id) => navigate(`/planet/${id}`);
+  const handleGoToQuiz = () => navigate(`/planet/${id}`);
 
   return (
     <>
