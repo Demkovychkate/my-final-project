@@ -12,9 +12,8 @@ function App() {
       <Route path='/*' element= {<NotFound />} />
       <Route element={<Templates />}>
         <Route path='/' element={<Planets />} />
-        <Route path='/ouruniverse/*' element={<OurUniverseRoutes/>} >
-          </Route>
-          </Route>
+        <Route path='/ouruniverse/*' element={<OurUniverseRoutes/>} />
+        </Route>
         </Routes>
       </BrowserRouter>
   );

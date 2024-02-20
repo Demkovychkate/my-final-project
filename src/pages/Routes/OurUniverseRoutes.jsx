@@ -3,11 +3,11 @@ import { Routes, Route } from 'react-router-dom';
 import Favorite from '../Favorite/Favorite';
 import CreateNewQuize from '../CreateNewQuize/CreateNewQuize';
 
-const OurUniverseRoutes = () => {
+const OurUniverseRoutes = () => (
   <Routes>
         <Route path='/favorite' element={<Favorite />} />
         <Route path='/new' element={<CreateNewQuize />} />
-  </Routes>;
-};
+  </Routes>
+);
 
 export default OurUniverseRoutes;
