@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 
 export const SideBarWrapper = styled.div`
   padding-top: 20%;
+  padding-right: 5%;
   height: calc(100vh - 120px);
  color: white;
-  width: 150px;   
+  width: 100%;    
   transition: width 0.3s ease;
 `;
 
 export const Input = styled.input`
-  width: 100%;
+  width: 80%;
   padding: 10px;
   margin: 10px 10px;
   border-radius: 20px;
