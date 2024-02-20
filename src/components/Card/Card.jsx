@@ -1,5 +1,6 @@
 import { CardMedia } from '@mui/material';
-import { useState, useNavigate } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { CardActions, CardContent } from '@mui/material';
 import { CardWrapper, DescriptionTypography } from './styled';
