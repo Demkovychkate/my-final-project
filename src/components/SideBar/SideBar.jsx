@@ -1,29 +1,11 @@
-import React, { useState } from 'react';
-import { TextField } from '@mui/material';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { SideBarWrapper, BurgerMenuIcon } from './styled';
+import { SideBarWrapper, Input, StyledLink } from './styled';
 
-const SideBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleSideBar = () => {
-    setIsOpen(!isOpen);
+const SideBar = () => (
     <SideBarWrapper>
-      <TextField
-       fullWidth
-       variant='outlined'
-      label='Search Planet'
-      placeholder='Search Planet'
-      />
-      <Link to='/ouruniverse/favorite'>Favorite</Link>
-    </SideBarWrapper>;
-  };
-
-  return (
-    <SideBarWrapper isOpen={isOpen}>
-      <BurgerMenuIcon onClick={toggleSideBar}>&#9776;</BurgerMenuIcon>
-      SideBar
-    </SideBarWrapper>
-  );
-};
-
+   <Input placeholder="Search" />
+   <StyledLink to='/ouruniverse/favorite'>Favorite</StyledLink>
+   </SideBarWrapper>
+);
 export default SideBar;
