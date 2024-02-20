@@ -21,6 +21,7 @@ const Planets = () => {
      {planets.map((planet) => (
       <CardItem
         key={planet.id}
+        id={planet.id}
         planet={planet.planet}
         image={planet.image}
         title={planet.title}

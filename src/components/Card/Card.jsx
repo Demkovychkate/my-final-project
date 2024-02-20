@@ -1,5 +1,5 @@
 import { CardMedia } from '@mui/material';
-import { useState } from 'react';
+import { useState, useNavigate } from 'react';
 import React from 'react';
 import { CardActions, CardContent } from '@mui/material';
 import { CardWrapper, DescriptionTypography } from './styled';
@@ -8,11 +8,15 @@ import BaseModal from '../BaseModal/BaseModal';
 import { ButtonWrapper } from './styled';
 
 const CardItem = ({
-  planet, image, description, title,
+  id, planet, image, description, title,
 }) => {
   const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate;
+
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
+
+  const handleGoToQuiz = (id) => navigate(`/planet/${id}`);
 
   return (
     <>
@@ -38,7 +42,7 @@ const CardItem = ({
         </CardContent>
         <CardActions>
           <ButtonWrapper size="small" onClick={handleOpenModal}>Learn More</ButtonWrapper>
-          <ButtonWrapper size="small">Start Quiz</ButtonWrapper>
+          <ButtonWrapper size="small" onClick={handleGoToQuiz}>Start Quiz</ButtonWrapper>
         </CardActions>
       </CardWrapper>
       <ModalWindow isOpen={openModal} handleClose={handleCloseModal}>
