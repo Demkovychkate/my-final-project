@@ -5,14 +5,14 @@ import Header from '../Header/Header';
 import SideBar from '../SideBar/SideBar';
 import { TemplateWrapper } from './styled';
 
-const Templates = () => (
+const Templates = ({ handleInputChange }) => (
   <TemplateWrapper>
     <Grid container >
     <Grid item xs={12}>
       <Header />
     </Grid>
     <Grid item xs={1.5}>
-      <SideBar />
+      <SideBar handleInputChange={handleInputChange} />
     </Grid>
     <Grid item xs={10.5}>
       <Outlet />
