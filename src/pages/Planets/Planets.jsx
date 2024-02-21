@@ -1,10 +1,10 @@
 import React, {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
-import { CircularProgress } from '@mui/material';
 import CardItem from '../../components/Card/Card';
 import { PlanetsWrapper } from './styled';
 import planetsApi from '../../api/services/planets';
+import Loader from '../../components/Loader/Loader';
 
 const Planets = ({ searchValue }) => {
   const [loading, setLoading] = useState(true);
@@ -27,7 +27,7 @@ const Planets = ({ searchValue }) => {
   }, [fetchPlanets]);
 
   const filteredPlanets = useMemo(() => planets.filter((planet) => planet.planet.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1), [planets, searchValue]);
-  if (loading) return <CircularProgress />;
+  if (loading) return <Loader />;
   return (
     <PlanetsWrapper>
      {filteredPlanets.map((planet) => (

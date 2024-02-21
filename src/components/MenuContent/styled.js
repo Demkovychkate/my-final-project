@@ -5,9 +5,13 @@ export const SideBarWrapper = styled.div`
   padding-top: 20%;
   padding-right: 5%;
   height: calc(100vh - 120px);
- color: white;
-  width: 100%;    
+  color: white;
+  width: ${props => (props.isOpen ? '100%' : '200px')};  
   transition: width 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: ${props => (props.isOpen ? '100%' : '0px')}; 
+  }
 `;
 
 export const Input = styled.input`
