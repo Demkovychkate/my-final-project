@@ -40,7 +40,8 @@ export const Input = styled.input`
   
   @media (max-width: 768px) {
     width:${(props) => (props.isOpen ? '50%' : '150px')};
-    position: ${(props) => (props.isOpen ? 'relative' : 'absolute')};
+    
+   
     top: 0;
     left: 0;
 `;
@@ -76,5 +77,6 @@ export const BurgerMenuIcon = styled.div`
 
   @media (min-width: 768px) {
     display: none;
+
   }
 `;

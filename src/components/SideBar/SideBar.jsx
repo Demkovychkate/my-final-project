@@ -10,12 +10,14 @@ const SideBar = ({ handleInputChange }) => {
   };
 
   return (
+    <>
     <SideBarWrapper isOpen={isOpen}>
       <Input placeholder="Search" onChange={handleInputChange} />
     <StyledLink to='/ouruniverse/favorite'>Favorite</StyledLink>
     <StyledLink to='/ouruniverse/new'>New Quiz</StyledLink>
-      <BurgerMenuIcon onClick={toggleSideBar}>&#9776;</BurgerMenuIcon>
-      </SideBarWrapper>
+    <BurgerMenuIcon onClick={toggleSideBar}>&#9776;</BurgerMenuIcon>
+    </SideBarWrapper>
+    </>
   );
 };
 
