@@ -2,12 +2,15 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const SideBarWrapper = styled.div`
-  padding-top: 20%;
-  padding-right: 5%;
   height: calc(100vh - 120px);
- color: white;
-  width: 100%;    
+  color: white;
+  width: ${(props) => (props.isOpen ? '100%' : '200px')}; 
+  overflow-x: hidden;
   transition: width 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: ${(props) => (props.isOpen ? '100%' : '0px')}; 
+  }
 `;
 
 export const Input = styled.input`
@@ -20,8 +23,7 @@ export const Input = styled.input`
   color: grey;
   opacity: 0.75;
   font-weight: bold;
-  font-family: 'Sacramento', cursive;
-  
+  font-family: 'Sacramento', cursive;  
 
   &::placeholder {
    padding: 10px;
@@ -31,6 +33,17 @@ export const Input = styled.input`
    font-family: 'Sacramento', cursive;
    
   }
+
+  @media (max-width: 1100px) {
+    width: 50%; 
+  }
+  
+  @media (max-width: 768px) {
+    width:${(props) => (props.isOpen ? '50%' : '150px')};
+    
+   
+    top: 0;
+    left: 0;
 `;
 
 export const StyledLink = styled(Link)`
@@ -49,5 +62,21 @@ export const StyledLink = styled(Link)`
                 0 0 50px white,
                 0 0 200px white;
     -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+  }
+
+  @media (max-width: 1100px) {
+    font-size: 20px;
+  }
+`;
+
+export const BurgerMenuIcon = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+
+  @media (min-width: 768px) {
+    display: none;
+
   }
 `;
