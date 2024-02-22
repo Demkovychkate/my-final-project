@@ -66,6 +66,10 @@ export const StyledLink = styled(Link)`
   @media (max-width: 1100px) {
     font-size: 20px;
   }
+
+  @media (max-width: 700px) {
+    font-size: 15px;
+  }
 `;
 
 export const BurgerMenuIcon = styled.div`
