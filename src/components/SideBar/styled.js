@@ -26,12 +26,11 @@ export const Input = styled.input`
   font-family: 'Sacramento', cursive;  
 
   &::placeholder {
-   padding: 10px;
-   text-align: center;
-   font-size: 20px;
-   font-weight: bold;
-   font-family: 'Sacramento', cursive;
-   
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Sacramento', cursive;
   }
 
   @media (max-width: 1100px) {
@@ -39,11 +38,11 @@ export const Input = styled.input`
   }
   
   @media (max-width: 768px) {
-    width:${(props) => (props.isOpen ? '50%' : '150px')};
-    
-   
-    top: 0;
-    left: 0;
+    width: ${(props) => (props.isOpen ? '50%' : '150px')}; 
+    position: ${(props) => (props.isOpen ? 'static' : 'absolute')};
+    top: ${(props) => (props.isOpen ? 'auto' : '0')};
+    left: ${(props) => (props.isOpen ? 'auto' : '0')};
+  }
 `;
 
 export const StyledLink = styled(Link)`
