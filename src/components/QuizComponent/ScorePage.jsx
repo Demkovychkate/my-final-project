@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from './styled';
 
-const ScorePage = ({ score, totalQuestions }) => {
+const ScorePage = ({ score, totalQuestions, onRestart }) => {
   const percentage = Math.round((score / totalQuestions) * 100);
 
   return (
@@ -8,9 +10,11 @@ const ScorePage = ({ score, totalQuestions }) => {
       <h2>Quiz Completed!</h2>
       <p>Your Score: {score} / {totalQuestions}</p>
       <p>Percentage: {percentage}%</p>
-      <button>Close</button>
-      <button>Restart</button>
-      </div>
+      <Button onClick={onRestart}>Restart</Button>
+      <Link to="/">
+        <Button>Close</Button>
+      </Link>
+    </div>
   );
 };
 

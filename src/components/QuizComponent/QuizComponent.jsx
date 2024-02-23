@@ -3,27 +3,34 @@ import QuizQuestion from './QuizQuestion';
 import Timer from './Timer';
 import ScorePage from './ScorePage';
 import {
-  QuizContainer, Header, QuizImage, QuestionCounter, Question,
+  QuizContainer, Header, QuizImage, Question,
 } from './styled';
-import './styled';
 
 const QuizComponent = ({ planet }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(300);
+  const [timeLeft, setTimeLeft] = useState(180);
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [timerFinished, setTimerFinished] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setTimeLeft(timeLeft - 1);
+      setTimeLeft((prevTime) => {
+        if (prevTime === 0 || quizCompleted) {
+          setTimerFinished(true);
+          clearTimeout(timer);
+          return prevTime;
+        }
+        return prevTime - 1;
+      });
     }, 1000);
 
-    if (timeLeft === 0) {
-      alert('Time is up!');
+    if (currentQuestionIndex === planet.questions.length) {
+      setQuizCompleted(true);
     }
 
     return () => clearTimeout(timer);
-  }, [timeLeft]);
+  }, [timeLeft, currentQuestionIndex, planet.questions.length, quizCompleted]);
 
   const handleAnswer = (isCorrect) => {
     if (isCorrect) {
@@ -34,9 +41,10 @@ const QuizComponent = ({ planet }) => {
 
   const handleRestart = () => {
     setCurrentQuestionIndex(0);
-    setTimeLeft(300);
+    setTimeLeft(180);
     setScore(0);
     setQuizCompleted(false);
+    setTimerFinished(false);
   };
 
   const handleClose = () => {
@@ -44,34 +52,27 @@ const QuizComponent = ({ planet }) => {
   };
 
   const renderQuestion = () => {
-    if (currentQuestionIndex < planet.questions.length) {
-      const question = planet.questions[currentQuestionIndex];
-      return <QuizQuestion question={question} onAnswer={handleAnswer} />;
-    }
-    return (
+    if (quizCompleted) {
+      return (
         <ScorePage
           score={score}
           totalQuestions={planet.questions.length}
           onRestart={handleRestart}
           onClose={handleClose}
         />
-    );
+      );
+    } if (currentQuestionIndex < planet.questions.length) {
+      const question = planet.questions[currentQuestionIndex];
+      return <QuizQuestion question={question} onAnswer={handleAnswer} />;
+    }
   };
 
   return (
     <QuizContainer>
       <Header>
-        <QuizImage src={`path/to/${planet.image}.jpg`} alt={planet.planet} />
-        <Timer timeLeft={timeLeft} />
-        <QuestionCounter>{currentQuestionIndex + 1}/{planet.questions.length}</QuestionCounter>
+        <Timer timeLeft={timeLeft} timerFinished={timerFinished} />
       </Header>
       <Question>{renderQuestion()}</Question>
-      {quizCompleted && (
-        <div>
-          <button onClick={handleRestart}>Restart</button>
-          <button onClick={handleClose}>Close</button>
-        </div>
-      )}
     </QuizContainer>
   );
 };
