@@ -2,15 +2,21 @@ import React, { useState } from 'react';
 
 const QuizQuestion = ({ question, onAnswer }) => {
   const [selectedOption, setSelectedOption] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
+    setErrorMessage('');
   };
 
   const handleSubmit = () => {
-    const isCorrect = selectedOption === question.answer;
-    onAnswer(isCorrect);
-    setSelectedOption('');
+    if (selectedOption) {
+      const isCorrect = selectedOption === question.answer;
+      onAnswer(isCorrect);
+      setSelectedOption('');
+    } else {
+      setErrorMessage('Please select an option before submitting.');
+    }
   };
 
   return (
@@ -32,6 +38,7 @@ const QuizQuestion = ({ question, onAnswer }) => {
         ))}
       </ul>
       <button onClick={handleSubmit}>Submit</button>
+      {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
 };

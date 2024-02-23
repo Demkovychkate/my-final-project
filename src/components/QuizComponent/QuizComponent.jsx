@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import QuizQuestion from './QuizQuestion';
 import Timer from './Timer';
 import ScorePage from './ScorePage';
-import {
-  QuizContainer, Header, QuizImage, Question,
-} from './styled';
+import QuizStartPage from './QuizStartPage';
+import { QuizContainer, Header, Question } from './styled';
 
 const QuizComponent = ({ planet }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -12,6 +11,7 @@ const QuizComponent = ({ planet }) => {
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [timerFinished, setTimerFinished] = useState(false);
+  const [quizStarted, setQuizStarted] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -37,6 +37,10 @@ const QuizComponent = ({ planet }) => {
       setScore(score + 1);
     }
     setCurrentQuestionIndex(currentQuestionIndex + 1);
+  };
+
+  const handleStartQuiz = () => {
+    setQuizStarted(true);
   };
 
   const handleRestart = () => {
@@ -68,12 +72,18 @@ const QuizComponent = ({ planet }) => {
   };
 
   return (
-    <QuizContainer>
-      <Header>
-        <Timer timeLeft={timeLeft} timerFinished={timerFinished} />
-      </Header>
-      <Question>{renderQuestion()}</Question>
-    </QuizContainer>
+    <>
+      {quizStarted ? (
+        <QuizContainer>
+          <Header>
+            <Timer timeLeft={timeLeft} timerFinished={timerFinished} />
+          </Header>
+          <Question>{renderQuestion()}</Question>
+        </QuizContainer>
+      ) : (
+        <QuizStartPage planet={planet} onStartQuiz={handleStartQuiz} />
+      )}
+    </>
   );
 };
 
