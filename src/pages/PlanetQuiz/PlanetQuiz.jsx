@@ -19,7 +19,7 @@ const PlanetQuiz = () => {
 
   return (
     <div>
-      {planet ? <QuizComponent planet={planet} /> : <div>Planet not found</div>}
+      <QuizComponent planet={planet} />
     </div>
   );
 };
