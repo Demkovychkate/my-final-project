@@ -1,7 +1,6 @@
 export const Quiz = [
   {
-    id: 1,
-    planet: 'Mercury',
+    planetId: 'Mercury',
     questions: [
       {
         question: 'What is the average distance of Mercury from the Sun?',
@@ -24,8 +23,7 @@ export const Quiz = [
     ],
   },
   {
-    id: 2,
-    planet: 'Venus',
+    planetId: 'Venus',
     questions: [
       {
         question: 'What is the average distance of Venus from the Sun?',
@@ -48,8 +46,7 @@ export const Quiz = [
     ],
   },
   {
-    id: 3,
-    planet: 'Earth',
+    planetId: 'Earth',
     questions: [
       {
         question: 'What is the average distance of Earth from the Sun?',
@@ -72,8 +69,7 @@ export const Quiz = [
     ],
   },
   {
-    id: 4,
-    planet: 'Mars',
+    planetId: 'Mars',
     questions: [
       {
         question: 'What is the average distance of Mars from the Sun?',
@@ -96,8 +92,7 @@ export const Quiz = [
     ],
   },
   {
-    id: 5,
-    planet: 'Jupiter',
+    planetId: 'Jupiter',
     questions: [
       {
         question: 'What is the average distance of Jupiter from the Sun?',
@@ -120,8 +115,7 @@ export const Quiz = [
     ],
   },
   {
-    id: 6,
-    planet: 'Saturn',
+    planetId: 'Saturn',
     questions: [
       {
         question: 'What is the average distance of Saturn from the Sun?',
@@ -144,8 +138,7 @@ export const Quiz = [
     ],
   },
   {
-    id: 7,
-    planet: 'Uranus',
+    planetId: 'Uranus',
     questions: [
       {
         question: 'What is the average distance of Uranus from the Sun?',
@@ -168,8 +161,7 @@ export const Quiz = [
     ],
   },
   {
-    id: 8,
-    planet: 'Neptune',
+    planetId: 'Neptune',
     questions: [
       {
         question: 'What is the average distance of Neptune from the Sun?',

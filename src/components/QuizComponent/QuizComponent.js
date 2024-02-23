@@ -3,8 +3,8 @@ import QuizQuestion from './QuizQuestion';
 import Timer from './Timer';
 import {
   QuizContainer, Header, QuizImage, QuestionCounter, Question,
-} from './styled'; 
-import './styled'; 
+} from './styled';
+import './styled';
 
 const QuizComponent = ({ planet }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -38,7 +38,7 @@ const QuizComponent = ({ planet }) => {
   return (
     <QuizContainer>
       <Header>
-        <QuizImage src={`path/to/${planet.planet}.jpg`} alt={planet.planet} />
+        <QuizImage src={`path/to/${planet.image}.jpg`} alt={planet.planet} />
         <Timer timeLeft={timeLeft} />
         <QuestionCounter>{currentQuestionIndex + 1}/{planet.questions.length}</QuestionCounter>
       </Header>
