@@ -1,5 +1,6 @@
 export const Quiz = [
   {
+    id: 1,
     planetId: 'Mercury',
     questions: [
       {
@@ -23,6 +24,7 @@ export const Quiz = [
     ],
   },
   {
+    id: 2,
     planetId: 'Venus',
     questions: [
       {
@@ -46,6 +48,7 @@ export const Quiz = [
     ],
   },
   {
+    id: 3,
     planetId: 'Earth',
     questions: [
       {
@@ -69,6 +72,7 @@ export const Quiz = [
     ],
   },
   {
+    id: 4,
     planetId: 'Mars',
     questions: [
       {
@@ -92,6 +96,7 @@ export const Quiz = [
     ],
   },
   {
+    id: 5,
     planetId: 'Jupiter',
     questions: [
       {
@@ -115,6 +120,7 @@ export const Quiz = [
     ],
   },
   {
+    id: 6,
     planetId: 'Saturn',
     questions: [
       {
@@ -138,6 +144,7 @@ export const Quiz = [
     ],
   },
   {
+    id: 7,
     planetId: 'Uranus',
     questions: [
       {
@@ -161,6 +168,7 @@ export const Quiz = [
     ],
   },
   {
+    id: 8,
     planetId: 'Neptune',
     questions: [
       {
