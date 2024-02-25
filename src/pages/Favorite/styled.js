@@ -21,3 +21,12 @@ export const Button = styled.button`
     background-color: #45a049;
   }
 `;
+
+export const QuizWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  color: white;
+`;
