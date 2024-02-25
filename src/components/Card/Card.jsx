@@ -9,7 +9,7 @@ import BaseModal from '../BaseModal/BaseModal';
 import { ButtonWrapper } from './styled';
 
 const CardItem = ({
-  id, planet, image, description, title,
+  id, planet, image, description, title, addToFavorites,
 }) => {
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
@@ -17,6 +17,13 @@ const CardItem = ({
   const handleCloseModal = () => setOpenModal(false);
 
   const handleGoToQuiz = () => navigate(`/planets/${id}`);
+  const handleAddToFavorites = () => {
+    addToFavorites({
+      id, planet, image, description, title,
+    });
+    navigate('/ouruniverse/favorite');
+  };
+
   return (
     <>
       <CardWrapper>
@@ -42,7 +49,8 @@ const CardItem = ({
         <CardActions>
           <ButtonWrapper size="small" onClick={handleOpenModal}>Learn More</ButtonWrapper>
           <ButtonWrapper size="small" onClick={handleGoToQuiz}>Start Quiz</ButtonWrapper>
-          </CardActions>
+          <ButtonWrapper size="small" onClick={handleAddToFavorites}>❤</ButtonWrapper>
+        </CardActions>
       </CardWrapper>
       <ModalWindow isOpen={openModal} handleClose={handleCloseModal}>
         <BaseModal

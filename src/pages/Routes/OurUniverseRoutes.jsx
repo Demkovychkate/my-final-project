@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Favorite from '../Favorite/';
+import Favorite from '../Favorite/Favorite';
 import CreateNewQuize from '../CreateNewQuize/CreateNewQuize';
 
 const OurUniverseRoutes = () => (

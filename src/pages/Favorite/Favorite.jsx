@@ -1,45 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from './styled';
-import { QuizText } from './styled';
+import React, { useEffect, useState } from 'react';
+import { CardMedia, CardActions, CardContent } from '@mui/material';
+import { CardWrapper, DescriptionTypography } from '../../components/Card/styled';
+import { ButtonWrapper } from '../../components/Card/styled';
+import CardItem from '../../components/Card/Card';
 
 const Favorite = () => {
-  const [favoriteQuizzes, setFavoriteQuizzes] = useState([]);
+  const [favoriteCards, setFavoriteCards] = useState([]);
 
-  useEffect(() => {   
-    const storedFavoriteQuizzes = localStorage.getItem('favoriteQuizzes');
-    if (storedFavoriteQuizzes) {
-      setFavoriteQuizzes(JSON.parse(storedFavoriteQuizzes));
+  useEffect(() => {
+    const storedFavoriteCards = localStorage.getItem('favoriteCards');
+    if (storedFavoriteCards) {
+      setFavoriteCards(JSON.parse(storedFavoriteCards));
     }
   }, []);
 
-  const removeFromFavorites = (id) => {   
-    const updatedFavoriteQuizzes = favoriteQuizzes.filter((quiz) => quiz.id !== id);
-    setFavoriteQuizzes(updatedFavoriteQuizzes);
-    localStorage.setItem('favoriteQuizzes', JSON.stringify(updatedFavoriteQuizzes));
+  useEffect(() => {
+    localStorage.setItem('favoriteCards', JSON.stringify(favoriteCards));
+  }, [favoriteCards]);
+
+  const addToFavorites = (newFavorite) => {
+    setFavoriteCards((prevFavoriteCards) => [...prevFavoriteCards, newFavorite]);
   };
 
-  const addToFavorites = (quiz) => { 
-    const updatedFavoriteQuizzes = [...favoriteQuizzes, quiz];
-    setFavoriteQuizzes(updatedFavoriteQuizzes);
-    localStorage.setItem('favoriteQuizzes', JSON.stringify(updatedFavoriteQuizzes));
+  const removeFromFavorites = (id) => {
+    setFavoriteCards((prevFavorites) => prevFavorites.filter((card) => card.id !== id));
   };
 
   return (
     <div>
-      <QuizText>Favorite Quizzes</QuizText>
-      {favoriteQuizzes.length === 0 ? (
-        <QuizText>No favorite quizzes added yet</QuizText>
-      ) : (
-        <ul>
-          {favoriteQuizzes.map((quiz) => (
-            <li key={quiz.id}>
-              <p>{quiz.planet}</p>
-              <Button onClick={() => removeFromFavorites(quiz.id)}>Remove from Favorites</Button>         
-            </li>
-          ))}
-        </ul>
-      )}
+      <h2>Favorite Cards</h2>
+      <ul>
+        {favoriteCards.map((card) => (
+          <CardItem
+            key={card.id}
+            id={card.id}
+            planet={card.planet}
+            image={card.image}
+            description={card.description}
+            title={card.title}
+            addToFavorites={addToFavorites}
+            removeFromFavorites={removeFromFavorites}
+          />
+        ))}
+      </ul>
     </div>
   );
 };
