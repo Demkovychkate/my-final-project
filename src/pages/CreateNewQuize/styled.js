@@ -36,3 +36,13 @@ export const ScoreWrapper = styled.div`
   box-shadow: 0 0 10px 0 #fff;
   color: white;
 `;
+
+export const QuizDetailsWrapper = styled.div`
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 #fff;
+  color: black;
+`;

@@ -1,85 +1,99 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Button } from '@mui/material';
-import { NewQuizeWrapper, FirstQuestionWrapper } from './styled';
+import React, { useState } from 'react';
 import QuizForm from './QuizForm';
 import QuizeDetailsPage from './QuizeDetailsPage';
-import Timer from '../../components/QuizComponent/Timer';
-import NewQuizScorePage from './NewQuizScorePage';
-import { Question } from '../../components/QuizComponent/styled';
+import QuizStartPage from '../../components/QuizComponent/QuizStartPage';
+import { NewQuizeWrapper } from './styled';
 
 const CreateNewQuize = () => {
-  const [isQuizeCreated, setIsQuizeCreated] = useState(false);
-  const [newQuizeData, setNewQuizeData] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(0);
-  const [timerFinished, setTimerFinished] = useState(false);
-  const [quizCompleted, setQuizCompleted] = useState(false);
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [quizeName, setQuizeName] = useState('');
+  const [quizeDescription, setQuizeDescription] = useState('');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null);
 
-  const handleCreateQuize = (newQuizeData) => {
-    setNewQuizeData(newQuizeData);
-    setIsQuizeCreated(true);
+  const handleStartQuiz = () => {
+    setQuizStarted(true);
   };
+
+  const handleCreateQuize = (newQuestions, name, description) => {
+    setQuestions(newQuestions);
+    setQuizeName(name);
+    setQuizeDescription(description);
+    setCurrentQuestionIndex(0);
+    setScore(0);
+    setQuizStarted(true);
+  };
+
+  const handleAnswer = (isCorrect) => {
+    if (isCorrect) {
+      setScore(score + 1);
+    }
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+  };
+
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+  };
+
+  const handleSubmitQuestion = () => {
+    if (selectedOption !== null) {
+      const isCorrect = selectedOption === questions[currentQuestionIndex].correctAnswer;
+      handleAnswer(isCorrect);
+      setSelectedOption(null);
+    } else {
+      alert('Please select an option before submitting.');
+    }
+  };
+
+  const handleRestart = () => {
+    setCurrentQuestionIndex(0);
+    setScore(0);
+    setQuizStarted(false);
+  };
+
   const handleClose = () => {
-    setQuizCompleted(false);
+    setQuizStarted(false);
   };
-  const { quizeId } = useParams();
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setTimeLeft((prevTime) => {
-        if (prevTime === 0 || quizCompleted) {
-          setTimerFinished(true);
-          clearTimeout(timer);
-          return prevTime;
-        }
-        return prevTime - 1;
-      });
-    }, 1000);
 
-    if (currentQuestionIndex === (newQuizeData?.questions?.length || 0)) {
-      setQuizCompleted(true);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [currentQuestionIndex, newQuizeData, quizCompleted]);
-
-  const renderQuestion = () => {
-    if (quizCompleted) {
+  const renderContent = () => {
+    if (!quizStarted) {
+      return <QuizStartPage onStartQuiz={handleStartQuiz} />;
+    } if (questions.length === 0) {
       return (
-        <NewQuizScorePage
-          score={newQuizeData?.questions?.length || 0}
-          totalQuestions={newQuizeData?.questions?.length || 0}
-          onClose={handleClose}
-        />
-      );
-    }
-    return (
         <QuizForm
           onCreateQuize={handleCreateQuize}
           setCurrentQuestionIndex={setCurrentQuestionIndex}
         />
+      );
+    } if (currentQuestionIndex < questions.length) {
+      return (
+        <QuizForm
+          question={questions[currentQuestionIndex]}
+          onAnswer={handleAnswer}
+          setCurrentQuestionIndex={setCurrentQuestionIndex}
+          onOptionChange={handleOptionChange}
+        />
+      );
+    } return (
+      <QuizeDetailsPage
+        quize={{
+          name: quizeName,
+          description: quizeDescription,
+          questions: questions,
+        }}
+        score={score}
+        onRestart={handleRestart}
+        onClose={handleClose}
+        handleSubmitQuestion={handleSubmitQuestion}
+      />
     );
   };
 
   return (
     <NewQuizeWrapper>
-      <FirstQuestionWrapper>
-        <Timer timeLeft={timeLeft} timerFinished={timerFinished} />
-        <h1>Create New Quize</h1>
-        {isQuizeCreated ? (
-          <QuizeDetailsPage newQuizeData={newQuizeData} />
-        ) : (
-          <QuizForm onCreateQuize={handleCreateQuize} setCurrentQuestionIndex={setCurrentQuestionIndex} />
-        )}
-        {quizCompleted && (
-          <NewQuizScorePage
-            score={newQuizeData?.questions?.length || 0}
-            totalQuestions={newQuizeData?.questions?.length || 0}
-            onClose={handleClose}
-          />
-        )}
-      </FirstQuestionWrapper>
+      {renderContent()}
     </NewQuizeWrapper>
   );
 };

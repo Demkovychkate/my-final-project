@@ -34,7 +34,7 @@ const QuizForm = ({ onCreateQuize, setCurrentQuestionIndex }) => {
   };
 
   const handleAddQuestion = () => {
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 1); // Update current question index
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     setQuestions((prevQuestions) => [...prevQuestions, { text: '', options: [], correctAnswer: '' }]);
   };
 

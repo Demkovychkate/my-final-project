@@ -1,31 +1,58 @@
-import { useParams } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
+import { QuizDetailsWrapper } from './styled';
 
-const QuizeDetailsPage = ({ quizzes, quizeId, newQuizeData }) => {
-  const quize = newQuizeData || quizzes.find((quize) => quize.id === quizeId);
+const QuizeDetailsPage = ({ quize, handleSubmitQuestion }) => {
+  const [selectedOptions, setSelectedOptions] = useState({});
 
-  if (!quize) {
-    return <div>Quize not found</div>;
+  const handleOptionChange = (questionIndex, optionIndex) => {
+    setSelectedOptions({
+      ...selectedOptions,
+      [questionIndex]: optionIndex,
+    });
+  };
+
+  const isOptionSelected = (questionIndex, optionIndex) => {
+    return selectedOptions[questionIndex] === optionIndex;
+  };
+
+  function renderOptions(question, questionIndex) {
+    return question.options.map((option, optionIndex) => (
+      <li key={optionIndex}>
+        <label>
+          <input
+            type="radio"
+            name={`question_${questionIndex}`}
+            value={optionIndex}
+            checked={isOptionSelected(questionIndex, optionIndex)}
+            onChange={() => handleOptionChange(questionIndex, optionIndex)} />
+          {option}
+        </label>
+      </li>
+    ));
+  }
+
+  const renderQuestions = () => {
+    return quize.questions.map((question, index) => (
+      <li key={index}>
+        <p>{question.text}</p>
+        <ul>{renderOptions(question, index)}</ul>
+        <button onClick={() => handleSubmitQuestion(question)}>Submit Answer</button>
+      </li>
+    ));
+  };
+
+  if (!quize || !Array.isArray(quize.questions)) {
+    return <div>Quiz data is invalid</div>;
   }
 
   return (
     <div>
-      <h1>{quize.name}</h1>
-      <p>Description: {quize.description}</p>
-      <h2>Questions:</h2>
-      <ul>
-        {quize.questions.map((question, index) => (
-          <li key={index}>
-            <p>{question.text}</p>
-            <ul>
-              {question.options.map((option, optionIndex) => (
-                <li key={optionIndex}>{option}</li>
-              ))}
-            </ul>
-            <p>Correct answer: {question.correctAnswer}</p>
-          </li>
-        ))}
-      </ul>
+      <QuizDetailsWrapper>
+        <h1>{quize.name}</h1>
+        <p>Description: {quize.description}</p>
+        <h2>Questions:</h2>
+        <ul>{renderQuestions()}</ul>
+      </QuizDetailsWrapper>
     </div>
   );
 };
