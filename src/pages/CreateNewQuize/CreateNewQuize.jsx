@@ -11,10 +11,11 @@ const CreateNewQuize = ({ handleQuizData }) => {
   const [quizData, setQuizData] = useState({ name: '', questions: [], description: '' });
   const [timeLeft, setTimeLeft] = useState(300);
   const [timerFinished, setTimerFinished] = useState(false);
+  const [quizCreated, setQuizCreated] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (quizStarted && timeLeft > 0) {
+      if (quizCreated && timeLeft > 0) {
         setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
       } else if (timeLeft === 0) {
         setTimerFinished(true);
@@ -22,7 +23,7 @@ const CreateNewQuize = ({ handleQuizData }) => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [quizStarted, timeLeft]);
+  }, [quizCreated, timeLeft]);
 
   const handleStartQuiz = () => {
     setQuizStarted(true);
@@ -30,8 +31,7 @@ const CreateNewQuize = ({ handleQuizData }) => {
 
   const handleCreateQuize = (data) => {
     setQuizData(data);
-    // Перенесемо встановлення quizStarted на true сюди, після отримання даних з форми вікторини
-    setQuizStarted(true);
+    setQuizCreated(true);
   };
 
   const handleRestart = () => {
@@ -39,12 +39,14 @@ const CreateNewQuize = ({ handleQuizData }) => {
     setQuizStarted(false);
     setTimeLeft(300);
     setTimerFinished(false);
+    setQuizCreated(false);
   };
 
   const handleClose = () => {
     setQuizStarted(false);
     setTimeLeft(300);
     setTimerFinished(false);
+    setQuizCreated(false);
   };
 
   const renderContent = () => {
@@ -63,7 +65,7 @@ const CreateNewQuize = ({ handleQuizData }) => {
 
   return (
     <NewQuizeWrapper>
-      {quizStarted && <Timer timeLeft={timeLeft} timerFinished={timerFinished} />}
+      {quizCreated && <Timer timeLeft={timeLeft} timerFinished={timerFinished} />}
       {renderContent()}
     </NewQuizeWrapper>
   );
