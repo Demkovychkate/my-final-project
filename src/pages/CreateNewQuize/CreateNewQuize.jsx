@@ -1,98 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import QuizForm from './QuizForm';
 import QuizeDetailsPage from './QuizeDetailsPage';
 import QuizStartPage from '../../components/QuizComponent/QuizStartPage';
 import { NewQuizeWrapper } from './styled';
+import Timer from '../../components/QuizComponent/Timer';
+import ScorePage from '../../components/QuizComponent/ScorePage';
 
-const CreateNewQuize = () => {
+const CreateNewQuize = ({ handleQuizData }) => {
   const [quizStarted, setQuizStarted] = useState(false);
-  const [questions, setQuestions] = useState([]);
-  const [quizeName, setQuizeName] = useState('');
-  const [quizeDescription, setQuizeDescription] = useState('');
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [quizData, setQuizData] = useState({ name: '', questions: [], description: '' });
+  const [timeLeft, setTimeLeft] = useState(300);
+  const [timerFinished, setTimerFinished] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (quizStarted && timeLeft > 0) {
+        setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
+      } else if (timeLeft === 0) {
+        setTimerFinished(true);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [quizStarted, timeLeft]);
 
   const handleStartQuiz = () => {
     setQuizStarted(true);
   };
 
-  const handleCreateQuize = (newQuestions, name, description) => {
-    setQuestions(newQuestions);
-    setQuizeName(name);
-    setQuizeDescription(description);
-    setCurrentQuestionIndex(0);
-    setScore(0);
+  const handleCreateQuize = (data) => {
+    setQuizData(data);
+    // Перенесемо встановлення quizStarted на true сюди, після отримання даних з форми вікторини
     setQuizStarted(true);
   };
 
-  const handleAnswer = (isCorrect) => {
-    if (isCorrect) {
-      setScore(score + 1);
-    }
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
-  };
-
-  const handleOptionChange = (option) => {
-    setSelectedOption(option);
-  };
-
-  const handleSubmitQuestion = () => {
-    if (selectedOption !== null) {
-      const isCorrect = selectedOption === questions[currentQuestionIndex].correctAnswer;
-      handleAnswer(isCorrect);
-      setSelectedOption(null);
-    } else {
-      alert('Please select an option before submitting.');
-    }
-  };
-
   const handleRestart = () => {
-    setCurrentQuestionIndex(0);
-    setScore(0);
+    setQuizData({ name: '', questions: [], description: '' });
     setQuizStarted(false);
+    setTimeLeft(300);
+    setTimerFinished(false);
   };
 
   const handleClose = () => {
     setQuizStarted(false);
+    setTimeLeft(300);
+    setTimerFinished(false);
   };
 
   const renderContent = () => {
     if (!quizStarted) {
       return <QuizStartPage onStartQuiz={handleStartQuiz} />;
-    } if (questions.length === 0) {
-      return (
-        <QuizForm
-          onCreateQuize={handleCreateQuize}
-          setCurrentQuestionIndex={setCurrentQuestionIndex}
-        />
-      );
-    } if (currentQuestionIndex < questions.length) {
-      return (
-        <QuizForm
-          question={questions[currentQuestionIndex]}
-          onAnswer={handleAnswer}
-          setCurrentQuestionIndex={setCurrentQuestionIndex}
-          onOptionChange={handleOptionChange}
-        />
-      );
+    } if (quizData.questions.length === 0) {
+      return <QuizForm onCreateQuize={handleCreateQuize} />;
     } return (
-      <QuizeDetailsPage
-        quize={{
-          name: quizeName,
-          description: quizeDescription,
-          questions: questions,
-        }}
-        score={score}
-        onRestart={handleRestart}
-        onClose={handleClose}
-        handleSubmitQuestion={handleSubmitQuestion}
-      />
+        <QuizeDetailsPage
+          quize={quizData}
+          onRestart={handleRestart}
+          onClose={handleClose}
+        />
     );
   };
 
   return (
     <NewQuizeWrapper>
+      {quizStarted && <Timer timeLeft={timeLeft} timerFinished={timerFinished} />}
       {renderContent()}
     </NewQuizeWrapper>
   );
