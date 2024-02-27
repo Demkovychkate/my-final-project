@@ -4,7 +4,7 @@ import QuizeDetailsPage from './QuizeDetailsPage';
 import QuizStartPage from '../../components/QuizComponent/QuizStartPage';
 import { NewQuizeWrapper } from './styled';
 import Timer from '../../components/QuizComponent/Timer';
-import ScorePage from '../../components/QuizComponent/ScorePage';
+import NewQuizScorePage from './NewQuizScorePage';
 
 const CreateNewQuize = ({ handleQuizData }) => {
   const [quizStarted, setQuizStarted] = useState(false);
@@ -12,6 +12,8 @@ const CreateNewQuize = ({ handleQuizData }) => {
   const [timeLeft, setTimeLeft] = useState(300);
   const [timerFinished, setTimerFinished] = useState(false);
   const [quizCreated, setQuizCreated] = useState(false);
+  const [score, setQuizScore] = useState(0);
+  const [quizCompleted, setQuizCompleted] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -40,6 +42,7 @@ const CreateNewQuize = ({ handleQuizData }) => {
     setTimeLeft(300);
     setTimerFinished(false);
     setQuizCreated(false);
+    setQuizScore(0);
   };
 
   const handleClose = () => {
@@ -47,26 +50,40 @@ const CreateNewQuize = ({ handleQuizData }) => {
     setTimeLeft(300);
     setTimerFinished(false);
     setQuizCreated(false);
+    setQuizScore(0);
   };
 
+  const handleSubmit = (data) => {
+    handleQuizData(data);
+    setQuizCompleted(true);
+  };
+  
   const renderContent = () => {
     if (!quizStarted) {
       return <QuizStartPage onStartQuiz={handleStartQuiz} />;
-    } if (quizData.questions.length === 0) {
+    }
+    if (quizData.questions.length === 0) {
       return <QuizForm onCreateQuize={handleCreateQuize} />;
-    } return (
-        <QuizeDetailsPage
-          quize={quizData}
-          onRestart={handleRestart}
-          onClose={handleClose}
-        />
+    }
+    if (quizCompleted)
+    return (
+      <QuizeDetailsPage
+        score={score}
+        quize={quizData}
+        onSubmit={handleSubmit}
+        onRestart={handleRestart}
+        onClose={handleClose}
+      />
     );
   };
 
   return (
     <NewQuizeWrapper>
-      {quizCreated && <Timer timeLeft={timeLeft} timerFinished={timerFinished} />}
+      {quizCreated && (
+        <Timer timeLeft={timeLeft} timerFinished={timerFinished} />
+      )}
       {renderContent()}
+      {quizCompleted && <NewQuizScorePage quizData={quizData} />}
     </NewQuizeWrapper>
   );
 };
