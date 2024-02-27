@@ -19,7 +19,8 @@ font-size: 40px;
 `;
 
 export const ButtonWrapper = styled.div`
-  padding: 10px;
+  padding: 5px;
+  font-size: 15px;
   background-color: none;
   color: white;
   font-weight: bold;
