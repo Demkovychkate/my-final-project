@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { QuizDetailsWrapper } from './styled';
+import NewQuizScorePage from './NewQuizScorePage';
 
 const QuizeDetailsPage = ({ quize, onSubmit }) => {
-  const [selectedOptions, setSelectedOptions] = useState(Array(quize.questions.length).fill(null));
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
+  const [results, setResults] = useState([]);
 
   const handleOptionChange = (questionIndex, optionIndex) => {
     setSelectedOptions((prevSelectedOptions) => {
@@ -13,12 +16,16 @@ const QuizeDetailsPage = ({ quize, onSubmit }) => {
   };
 
   const handleSubmit = () => {
-    if (selectedOptions) {
-      const isCorrect = selectedOptions.every((option, index) => option === quize.questions[index].correctOptionIndex);
-      onSubmit(isCorrect);
-      setSelectedOptions(Array(quize.questions.length).fill(null));
+    if (selectedOptions.some((option) => option === undefined)) {
+      alert('Please select an option for all questions before submitting.');
     } else {
-      alert('Будь ласка, виберіть відповідь перед відправкою.');
+      const newResults = quize.questions.map((question, index) => ({
+        isCorrect: question.answer === selectedOptions[index],
+        questionIndex: index,
+      }));
+      setResults(newResults);
+      setSubmitted(true);
+      onSubmit(newResults);
     }
   };
 
@@ -52,6 +59,7 @@ const QuizeDetailsPage = ({ quize, onSubmit }) => {
         <h2>Questions:</h2>
         <ul>{renderQuestions()}</ul>
         <button onClick={handleSubmit}>Submit</button>
+        {submitted && <NewQuizScorePage results={results} />}
       </QuizDetailsWrapper>
     </div>
   );
