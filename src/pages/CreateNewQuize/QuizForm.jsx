@@ -31,12 +31,28 @@ const QuizForm = ({ onCreateQuize }) => {
     alert('Quiz created successfully!');
   };
 
+  const handleAddQuestion = () => {
+    setQuestions([...questions, { text: '', options: [] }]);
+  };
+
+  const handleAddOption = (index) => {
+    const newQuestions = [...questions];
+    newQuestions[index].options.push('');
+    setQuestions(newQuestions);
+  };
+
+  const handleSetCorrectAnswer = (index, optionIndex) => {
+    const newQuestions = [...questions];
+    newQuestions[index].correctAnswer = optionIndex;
+    setQuestions(newQuestions);
+  };
+
   return (
     <>
       <input name="quizeName" type="text" value={quizeName} onChange={handleInputChange} placeholder="Enter Quiz Name" />
       <input name="quizeDescription" type="text" value={quizeDescription} onChange={handleInputChange} placeholder="Enter Quiz Description" />
       <h2>Questions:</h2>
-      <Button onClick={() => setQuestions([...questions, { text: '', options: [] }])}>Add Question</Button>
+      <Button onClick={handleAddQuestion}>Add Question</Button>
       {questions.map((question, index) => (
         <div key={index}>
           <input
@@ -49,14 +65,7 @@ const QuizForm = ({ onCreateQuize }) => {
             }}
             placeholder="Enter Question"
           />
-          <Button onClick={() => {
-            const newQuestions = [...questions];
-            newQuestions[index].options.push('');
-            setQuestions(newQuestions);
-          }}
-          >
-            Add Option
-          </Button>
+          <Button onClick={() => handleAddOption(index)}>Add Option</Button>
           <ul>
             {question.options.map((option, optionIndex) => (
               <li key={optionIndex}>
@@ -73,28 +82,16 @@ const QuizForm = ({ onCreateQuize }) => {
               </li>
             ))}
           </ul>
-         <h2>Correct answer</h2>
-          <input
-            type="text"
-            value={question.correctAnswer}
-            onChange={(e) => {
-              const newQuestions = [...questions];
-              newQuestions[index].correctAnswer = e.target.value;
-              setQuestions(newQuestions);
-            }}
-            placeholder="Enter correct answer"
-          />
-          <Button onClick={() => {
-            const correctAnswer = questions[index].correctAnswer;
-            const newQuestions = [...questions];
-            newQuestions[index].options.push(correctAnswer);
-            setQuestions(newQuestions);
-          }
-          }
-          >
-            Add Correct Answer
-          </Button>
-          </div>
+          <h2>Correct answer</h2>
+          <select value={question.correctAnswer} onChange={(e) => handleSetCorrectAnswer(index, e.target.value)}>
+            <option value="">Select correct answer</option>
+            {question.options.map((option, optionIndex) => (
+              <option key={optionIndex} value={optionIndex}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
       ))}
       <Button onClick={handleSubmit}>Create Quiz</Button>
     </>
