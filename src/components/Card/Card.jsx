@@ -7,6 +7,7 @@ import { CardWrapper, DescriptionTypography } from './styled';
 import ModalWindow from '../ModalWindow/ModalWindow';
 import BaseModal from '../BaseModal/BaseModal';
 import { ButtonWrapper } from './styled';
+import { FavorireButton } from './styled';
 
 const CardItem = ({
   id, planet, image, description, title,
@@ -55,7 +56,7 @@ const CardItem = ({
         <CardActions>
           <ButtonWrapper size="small" onClick={handleOpenModal}>Learn More</ButtonWrapper>
           <ButtonWrapper size="small" onClick={handleGoToQuiz}>Start Quiz</ButtonWrapper>
-          <ButtonWrapper size="small" onClick={handleAddToFavorites}>❤</ButtonWrapper>
+          <FavorireButton size="small" onClick={handleAddToFavorites}>❤</FavorireButton>
         </CardActions>
       </CardWrapper>
       <ModalWindow isOpen={openModal} handleClose={handleCloseModal}>

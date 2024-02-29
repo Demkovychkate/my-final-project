@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { QuizDetailsWrapper } from './styled';
 import NewQuizScorePage from './NewQuizScorePage';
+import { ButtonWrapper } from '../../components/Card/styled';
 
 const QuizeDetailsPage = ({ quize, onSubmit }) => {
   const [selectedOptions, setSelectedOptions] = useState(new Array(quize.questions.length).fill(null));
@@ -55,7 +56,7 @@ const QuizeDetailsPage = ({ quize, onSubmit }) => {
         <p>Description: {quize.description}</p>
         <h2>Questions:</h2>
         <ul>{renderQuestions()}</ul>
-        <button onClick={handleSubmit}>Submit</button>
+        <ButtonWrapper onClick={handleSubmit}>Answer</ButtonWrapper>
         {submitted && <NewQuizScorePage quizData={quize} correctAnswers={correctAnswers} />}
       </QuizDetailsWrapper>
     </div>

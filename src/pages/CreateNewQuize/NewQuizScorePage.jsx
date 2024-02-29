@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from './styled';
+import { ButtonWrapper } from '../../components/Card/styled';
 import { ScoreWrapper } from './styled';
 
 const NewQuizScorePage = ({
@@ -9,9 +9,9 @@ const NewQuizScorePage = ({
     <ScoreWrapper>
       <h1>Quiz Score</h1>
       <h2>{correctAnswers} / {quizData.questions.length}</h2>
-      <button onClick={onRestart}>Restart</button>
+      <ButtonWrapper onClick={onRestart}>Restart</ButtonWrapper>
       <Link to='/'>
-        <Button>Close</Button>
+        <ButtonWrapper>Close</ButtonWrapper>
       </Link>
     </ScoreWrapper>
 );

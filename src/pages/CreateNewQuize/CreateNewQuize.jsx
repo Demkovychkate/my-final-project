@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import QuizForm from './QuizForm';
 import QuizeDetailsPage from './QuizeDetailsPage';
-import QuizStartPage from '../../components/QuizComponent/QuizStartPage';
+import NewQuizStartPage from './NewQuizStartPage';
 import { NewQuizeWrapper } from './styled';
 import Timer from '../../components/QuizComponent/Timer';
 import NewQuizScorePage from './NewQuizScorePage';
@@ -63,7 +63,7 @@ const CreateNewQuize = ({ handleQuizData }) => {
 
   const renderContent = () => {
     if (!quizStarted) {
-      return <QuizStartPage onStartQuiz={handleStartQuiz} />;
+      return <NewQuizStartPage onStartQuiz={handleStartQuiz} />;
     }
     if (quizData.questions.length === 0) {
       return <QuizForm onCreateQuize={handleCreateQuize} />;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from './styled';
+import { ButtonWrapper } from '../../components/Card/styled';
+import { QuizFormWrapper } from './styled';
 
 const QuizForm = ({ onCreateQuize }) => {
   const [quizeName, setQuizeName] = useState('');
@@ -49,10 +50,12 @@ const QuizForm = ({ onCreateQuize }) => {
 
   return (
     <>
+      <QuizFormWrapper>
+      <h2>Create New Quiz</h2>
       <input name="quizeName" type="text" value={quizeName} onChange={handleInputChange} placeholder="Enter Quiz Name" />
       <input name="quizeDescription" type="text" value={quizeDescription} onChange={handleInputChange} placeholder="Enter Quiz Description" />
       <h2>Questions:</h2>
-      <Button onClick={handleAddQuestion}>Add Question</Button>
+      <ButtonWrapper onClick={handleAddQuestion}>Add Question</ButtonWrapper>
       {questions.map((question, index) => (
         <div key={index}>
           <input
@@ -65,7 +68,7 @@ const QuizForm = ({ onCreateQuize }) => {
             }}
             placeholder="Enter Question"
           />
-          <Button onClick={() => handleAddOption(index)}>Add Option</Button>
+          <ButtonWrapper onClick={() => handleAddOption(index)}>Add Option</ButtonWrapper>
           <ul>
             {question.options.map((option, optionIndex) => (
               <li key={optionIndex}>
@@ -93,7 +96,8 @@ const QuizForm = ({ onCreateQuize }) => {
           </select>
         </div>
       ))}
-      <Button onClick={handleSubmit}>Create Quiz</Button>
+      <ButtonWrapper onClick={handleSubmit}>Create New Quiz</ButtonWrapper>
+      </QuizFormWrapper>
     </>
   );
 };

@@ -32,7 +32,7 @@ const Planets = ({ searchValue }) => {
   if (loading) return <Loader />;
   if (error) return <div>Error: {error.message}</div>;
   if (filteredPlanets.length === 0) {
-    return <Toast message="No planets found" />;
+    return <Toast message="Information not faund" />;
   }
   return (
     <PlanetsWrapper>

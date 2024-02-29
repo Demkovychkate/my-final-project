@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { QuizQuestionWrapper } from './styled';
+import { Button } from './styled';
 
 const QuizQuestion = ({ question, onAnswer }) => {
   const [selectedOption, setSelectedOption] = useState('');
@@ -15,12 +17,13 @@ const QuizQuestion = ({ question, onAnswer }) => {
       onAnswer(isCorrect);
       setSelectedOption('');
     } else {
-      setErrorMessage('Please select an option before submitting.');
+      setErrorMessage('Please select an option before you give an answer');
     }
   };
 
   return (
-    <div>
+    < >
+      <QuizQuestionWrapper>
       <h3>{question.question}</h3>
       <ul>
         {question.options.map((option, index) => (
@@ -37,9 +40,10 @@ const QuizQuestion = ({ question, onAnswer }) => {
           </li>
         ))}
       </ul>
-      <button onClick={handleSubmit}>Submit</button>
+      <Button onClick={handleSubmit}>Answer</Button>
       {errorMessage && <p>{errorMessage}</p>}
-    </div>
+    </QuizQuestionWrapper>
+    </>
   );
 };
 
