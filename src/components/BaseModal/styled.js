@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 export const Typography = styled.div`
-  font-family: "Indie Flower", cursive;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 25px;  
+font-family: "Cinzel", serif;
+font-optical-sizing: auto;
+font-weight: 500;
+font-style: normal;
+font-size: 20px;
   height: 300px;
   overflow-y: auto;
   padding: 0;

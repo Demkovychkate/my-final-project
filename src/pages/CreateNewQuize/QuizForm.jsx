@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from './styled';
+import { ButtonWrapper } from '../../components/Card/styled';
+import { QuizFormWrapper } from './styled';
 
 const QuizForm = ({ onCreateQuize }) => {
   const [quizeName, setQuizeName] = useState('');
@@ -31,90 +32,72 @@ const QuizForm = ({ onCreateQuize }) => {
     alert('Quiz created successfully!');
   };
 
+  const handleAddQuestion = () => {
+    setQuestions([...questions, { text: '', options: [] }]);
+  };
+
+  const handleAddOption = (index) => {
+    const newQuestions = [...questions];
+    newQuestions[index].options.push('');
+    setQuestions(newQuestions);
+  };
+
+  const handleSetCorrectAnswer = (index, optionIndex) => {
+    const newQuestions = [...questions];
+    newQuestions[index].correctAnswer = optionIndex;
+    setQuestions(newQuestions);
+  };
+
   return (
     <>
-      <input
-        name='quizeName'
-        type='text'
-        value={quizeName}
-        onChange={handleInputChange}
-        placeholder='Enter Quiz Name'
-      />
-      <input
-        name='quizeDescription'
-        type='text'
-        value={quizeDescription}
-        onChange={handleInputChange}
-        placeholder='Enter Quiz Description'
-      />
+      <QuizFormWrapper>
+      <h2>Create New Quiz</h2>
+      <input name="quizeName" type="text" value={quizeName} onChange={handleInputChange} placeholder="Enter Quiz Name" />
+      <input name="quizeDescription" type="text" value={quizeDescription} onChange={handleInputChange} placeholder="Enter Quiz Description" />
       <h2>Questions:</h2>
-      <Button
-        onClick={() => setQuestions([...questions, { text: '', options: [] }])}
-      >
-        Add Question
-      </Button>
+      <ButtonWrapper onClick={handleAddQuestion}>Add Question</ButtonWrapper>
       {questions.map((question, index) => (
         <div key={index}>
           <input
-            type='text'
+            type="text"
             value={question.text}
             onChange={(e) => {
               const newQuestions = [...questions];
               newQuestions[index].text = e.target.value;
               setQuestions(newQuestions);
             }}
-            placeholder='Enter Question'
+            placeholder="Enter Question"
           />
-          <Button
-            onClick={() => {
-              const newQuestions = [...questions];
-              newQuestions[index].options.push('');
-              setQuestions(newQuestions);
-            }}
-          >
-            Add Option
-          </Button>
+          <ButtonWrapper onClick={() => handleAddOption(index)}>Add Option</ButtonWrapper>
           <ul>
             {question.options.map((option, optionIndex) => (
               <li key={optionIndex}>
                 <input
-                  type='text'
+                  type="text"
                   value={option}
                   onChange={(e) => {
                     const newQuestions = [...questions];
                     newQuestions[index].options[optionIndex] = e.target.value;
                     setQuestions(newQuestions);
                   }}
-                  placeholder='Enter Option'
+                  placeholder="Enter Option"
                 />
               </li>
             ))}
           </ul>
-          <h2>Правильна відповідь</h2>
-          <input
-            type='text'
-            value={question.correctAnswer}
-            onChange={(e) => {
-              const newQuestions = [...questions];
-              newQuestions[index].correctAnswer = e.target.value;
-              setQuestions(newQuestions);
-            }}
-            placeholder='Введіть правильну відповідь'
-          />
-          <Button
-            onClick={() => {
-              const correctAnswer = questions[index].correctAnswer;
-              const newQuestions = [...questions];
-              newQuestions[index].options.push(correctAnswer);
-              newQuestions[index].correctOptionIndex = newQuestions[index].options.length - 1;
-              setQuestions(newQuestions);
-            }}
-          >
-            Додати правильну відповідь
-          </Button>
+          <h2>Correct answer</h2>
+          <select value={question.correctAnswer} onChange={(e) => handleSetCorrectAnswer(index, e.target.value)}>
+            <option value="">Select correct answer</option>
+            {question.options.map((option, optionIndex) => (
+              <option key={optionIndex} value={optionIndex}>
+                {option}
+              </option>
+            ))}
+          </select>
         </div>
       ))}
-      <Button onClick={handleSubmit}>Create Quiz</Button>
+      <ButtonWrapper onClick={handleSubmit}>Create New Quiz</ButtonWrapper>
+      </QuizFormWrapper>
     </>
   );
 };

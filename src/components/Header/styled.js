@@ -12,6 +12,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Title = styled.h1`
+  font-family: "Cinzel", serif;
   font-size: 80px;
   font-weight: 400;
   color: white;
@@ -23,7 +24,7 @@ export const Title = styled.h1`
   transform: translate(-50%, -50%);
   cursor: pointer;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1150px) {
     font-size: 40px; 
   }
 `;

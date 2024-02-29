@@ -23,14 +23,17 @@ export const Input = styled.input`
   color: grey;
   opacity: 0.75;
   font-weight: bold;
-  font-family: 'Sacramento', cursive;  
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 
   &::placeholder {
     padding: 10px;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
-    font-family: 'Sacramento', cursive;
+    font-family: "Cinzel", serif;
   }
 
   @media (max-width: 1100px) {
@@ -46,12 +49,16 @@ export const Input = styled.input`
 `;
 
 export const StyledLink = styled(Link)`
-  color: white; 
+  color: white;   
   text-decoration: none; 
-  font-size: 35px;
+  font-size: 25px;
   display: block; 
   margin: 20px; 
   font-weight: bold;
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 
   &:hover {
     background: none;
